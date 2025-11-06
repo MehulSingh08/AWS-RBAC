@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS RBAC File Upload</title>
+    <link rel="icon" type="image/x-icon" href="aws.ico">
+    <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.12/dist/amazon-cognito-identity.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="aws.ico" alt="AWS Logo" class="aws-logo">
+            <h1>AWS RBAC File Upload</h1>
+            <p>Secure file management with role-based access control</p>
+        </div>
+
+        <div class="content">
+            <!-- Sign Up Section -->
+            <div id="signup-section" class="auth-section active">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-password" placeholder="Enter a strong password">
+                        <button type="button" class="toggle-password" onclick="togglePassword('signup-password', this)">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="admin-request">
+                        <span>Request Admin Access (requires manual approval)</span>
+                    </label>
+                </div>
+                <div class="hint">
+                    Password must be at least 8 characters with atleast 1 uppercase, lowercase, special char and number
+                </div>
+                <button onclick="signUpUser()">Create Account</button>
+                <div class="toggle-link">
+                    Already have an account? <a onclick="showSignIn()">Sign In</a>
+                </div>
+            </div>
+
+            <!-- Sign In Section -->
+            <div id="signin-section" class="auth-section">
+                <h2>Sign In</h2>
+                <div class="form-group">
+                    <label for="signin-email">Email Address</label>
+                    <input type="email" id="signin-email" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signin-password" placeholder="Enter your password">
+                        <button type="button" class="toggle-password" onclick="togglePassword('signin-password', this)">👁️</button>
+                    </div>
+                </div>
+                <button onclick="signInUser()">Sign In</button>
+                <div class="toggle-link">
+                    Don't have an account? <a onclick="showSignUp()">Create Account</a>
+                </div>
+            </div>
+
+            <!-- File Management Section -->
+            <div id="upload-section" class="upload-section">
+                <div class="user-info">
+                    <p><strong>Logged in as:</strong> <span id="user-email"></span></p>
+                    <p><strong>Role:</strong> <span id="user-role" class="role-badge"></span></p>
+                </div>
+
+                <h2>Upload File</h2>
+                <div class="form-group">
+                    <label for="file-input">Choose File</label>
+                    <input type="file" id="file-input">
+                </div>
+                <button onclick="uploadFile()">Upload to S3</button>
+
+                <h2 style="margin-top: 40px;">My Files</h2>
+                <button onclick="listFiles()" class="secondary-btn">Refresh File List</button>
+                <div id="file-list"></div>
+
+                <button class="secondary-btn" onclick="signOut()" style="margin-top: 30px;">Sign Out</button>
+            </div>
+
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+</body>
+</html>
