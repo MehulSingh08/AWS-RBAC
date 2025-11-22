@@ -9,90 +9,187 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="aws.ico" alt="AWS Logo" class="aws-logo">
-            <h1>AWS RBAC File Upload</h1>
-            <p>Secure file management with role-based access control</p>
+    <div class="main-wrapper">
+        <!-- Left Side - Project Info -->
+        <div class="project-info">
+            <div class="project-info-content">
+                <h1>AWS RBAC File Management System</h1>
+                <p class="tagline">Secure file management with role-based access control</p>
+
+                <div class="features">
+                    <div class="feature-item">
+                        <div>
+                            <h3>Role-Based Access</h3>
+                            <p>Admin and User roles with different permission levels</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div>
+                            <h3>AWS S3 Storage</h3>
+                            <p>Secure cloud storage with pre-signed URLs</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div>
+                            <h3>Cognito Authentication</h3>
+                            <p>Enterprise-grade user authentication</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div>
+                            <h3>Serverless Backend</h3>
+                            <p>Lambda functions with API Gateway</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <h3>Tech Stack</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">IAM</span>
+                        <span class="tech-badge">Cognito</span>
+                        <span class="tech-badge">S3</span>
+                        <span class="tech-badge">Lambda</span>
+                        <span class="tech-badge">SES</span>
+                        <span class="tech-badge">API Gateway</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="content">
-            <!-- Sign Up Section -->
-            <div id="signup-section" class="auth-section active">
-                <h2>Create Account</h2>
-                <div class="form-group">
-                    <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" placeholder="your.email@example.com">
+        <!-- Right Side - Auth Forms -->
+        <div class="auth-container">
+            <div class="container">
+                <div class="header">
+                    <div class="demo-badge">DEMO VERSION</div>
+                    <h1>Welcome</h1>
+                    <p>Sign in to manage your files securely</p>
                 </div>
-                <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="signup-password" placeholder="Enter a strong password">
-                        <button type="button" class="toggle-password" onclick="togglePassword('signup-password', this)">👁️</button>
+
+                <div class="content">
+                    <!-- Test Credentials Alert -->
+                    <div class="demo-alert">
+                        <div class="demo-alert-header">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            <span>Test Accounts Available</span>
+                        </div>
+                        <p>Use pre-configured test accounts below. Full OTP email verification coming soon (AWS SES production access pending).</p>
+                        
+                        <div class="captcha-inline">
+                            <div id="captcha-challenge-inline" class="captcha-challenge-inline">
+                                <p class="captcha-label">Verify to reveal credentials:</p>
+                                <div class="captcha-row">
+                                    <div class="captcha-math-inline">
+                                        <span id="captcha-num1-inline"></span> + <span id="captcha-num2-inline"></span> = ?
+                                    </div>
+                                    <input type="number" id="captcha-answer-inline" placeholder="?" class="captcha-input-inline">
+                                    <button onclick="verifyCaptchaInline()" class="captcha-btn-inline">Verify</button>
+                                </div>
+                            </div>
+
+                            <div id="credentials-display-inline" class="credentials-display-inline" style="display: none;">
+                                <div class="credential-card-inline">
+                                    <span class="credential-type-inline user">USER</span>
+                                    <div class="credential-data">
+                                        <code>test.rbac1@gmail.com</code>
+                                        <code>Mehul@1111</code>
+                                    </div>
+                                </div>
+
+                                <div class="credential-card-inline">
+                                    <span class="credential-type-inline admin">ADMIN</span>
+                                    <div class="credential-data">
+                                        <code>test.admin.rbac1@gmail.com</code>
+                                        <code>Mehul@9999</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="admin-request">
-                        <span>Request Admin Access (requires manual approval)</span>
-                    </label>
-                </div>
-                <div class="hint">
-                    Password must be at least 8 characters with atleast 1 uppercase, lowercase, special char and number
-                </div>
-                <button onclick="signUpUser()">Create Account</button>
-                <div class="toggle-link">
-                    Already have an account? <a onclick="showSignIn()">Sign In</a>
-                </div>
-            </div>
 
-            <!-- Sign In Section -->
-            <div id="signin-section" class="auth-section">
-                <h2>Sign In</h2>
-                <div class="form-group">
-                    <label for="signin-email">Email Address</label>
-                    <input type="email" id="signin-email" placeholder="your.email@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="signin-password">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="signin-password" placeholder="Enter your password">
-                        <button type="button" class="toggle-password" onclick="togglePassword('signin-password', this)">👁️</button>
+                    <!-- Sign Up Section -->
+                    <div id="signup-section" class="auth-section active">
+                        <h2>Create Account</h2>
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="signup-password" placeholder="Enter a strong password">
+                                <button type="button" class="toggle-password" onclick="togglePassword('signup-password', this)">&#128065;</button>
+                            </div>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="admin-request">
+                                <span>Request Admin Access (requires manual approval)</span>
+                            </label>
+                        </div>
+                        <div class="hint">
+                            Password must be at least 8 characters with atleast 1 uppercase, lowercase, special char and number
+                        </div>
+                        <button onclick="signUpUser()">Create Account</button>
+                        <div class="toggle-link">
+                            Already have an account? <a onclick="showSignIn()">Sign In</a>
+                        </div>
                     </div>
-                </div>
-                <button onclick="signInUser()">Sign In</button>
-                <div class="toggle-link">
-                    Don't have an account? <a onclick="showSignUp()">Create Account</a>
+
+                    <!-- Sign In Section -->
+                    <div id="signin-section" class="auth-section">
+                        <h2>Sign In</h2>
+                        <div class="form-group">
+                            <label for="signin-email">Email Address</label>
+                            <input type="email" id="signin-email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signin-password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="signin-password" placeholder="Enter your password">
+                                <button type="button" class="toggle-password" onclick="togglePassword('signin-password', this)">&#128065;</button>
+                            </div>
+                        </div>
+                        <button onclick="signInUser()">Sign In</button>
+                        <div class="toggle-link">
+                            Don't have an account? <a onclick="showSignUp()">Create Account</a>
+                        </div>
+                    </div>
+
+                    <!-- File Management Section -->
+                    <div id="upload-section" class="upload-section">
+                        <div class="user-info">
+                            <p><strong>Logged in as:</strong> <span id="user-email"></span></p>
+                            <p><strong>Role:</strong> <span id="user-role" class="role-badge"></span></p>
+                        </div>
+
+                        <h2>Upload File</h2>
+                        <div class="form-group">
+                            <label for="file-input">Choose File</label>
+                            <input type="file" id="file-input">
+                        </div>
+                        <button onclick="uploadFile()">Upload to S3</button>
+
+                        <h2 style="margin-top: 40px;">My Files</h2>
+                        <button onclick="listFiles()" class="secondary-btn">Refresh File List</button>
+                        <div id="file-list"></div>
+
+                        <button class="secondary-btn" onclick="signOut()" style="margin-top: 30px;">Sign Out</button>
+                    </div>
+
+                    <div id="message"></div>
                 </div>
             </div>
-
-            <!-- File Management Section -->
-            <div id="upload-section" class="upload-section">
-                <div class="user-info">
-                    <p><strong>Logged in as:</strong> <span id="user-email"></span></p>
-                    <p><strong>Role:</strong> <span id="user-role" class="role-badge"></span></p>
-                </div>
-
-                <h2>Upload File</h2>
-                <div class="form-group">
-                    <label for="file-input">Choose File</label>
-                    <input type="file" id="file-input">
-                </div>
-                <button onclick="uploadFile()">Upload to S3</button>
-
-                <h2 style="margin-top: 40px;">My Files</h2>
-                <button onclick="listFiles()" class="secondary-btn">Refresh File List</button>
-                <div id="file-list"></div>
-
-                <button class="secondary-btn" onclick="signOut()" style="margin-top: 30px;">Sign Out</button>
-            </div>
-
-            <div id="message"></div>
         </div>
     </div>
 
     <script src="config.js"></script>
     <script src="auth.js"></script>
     <script src="api.js"></script>
+    <script src="captcha.js"></script>
 </body>
 </html>
